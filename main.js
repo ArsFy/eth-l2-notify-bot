@@ -111,10 +111,13 @@ bot.on("callback_query", (query) => {
             break;
     }
 
-    try {
-        bot.answerCallbackQuery(query.id);
-        bot.deleteMessage(query.message.chat.id, query.message.message_id);
-    }catch(e) {}
+    bot.answerCallbackQuery(query.id);
+
+    (async ()=>{
+        try {
+            await bot.deleteMessage(query.message.chat.id, query.message.message_id);
+        }catch(e) {}
+    })();
 });
 
 todo.ScanTasks(async (datalist, account, chat, chain) => {
