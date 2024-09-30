@@ -20,7 +20,8 @@ const AddListener = (account, chat, chain) => {
             if (response.length === 0) resolve(["無交易紀錄，僅支援添加已有交易紀錄的地址", false]);
 
             if (account in data[chain]) {
-                data[chain][account].chat.push(chat);
+                if (data[chain][account].chat.includes(chat)) resolve(["已被添加", false]);
+                else data[chain][account].chat.push(chat);
             }else{
                 data[chain][account] = {
                     block: String(Number(response[0].blockNumber) + 1),
