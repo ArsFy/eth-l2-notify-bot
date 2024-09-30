@@ -70,6 +70,14 @@ bot.on("message", (msg) => {
                 });
             }
             break;
+        case "/address": case `/address@${username}`:
+            const res = todo.GetUserMap(chatId)
+            if (res.length === 0) {
+                bot.sendMessage(chatId, "未添加監控地址");
+            } else {
+                bot.sendMessage(chatId, "已添加監控地址: \n" + res.join("\n"));
+            }
+            break;
     }
 });
 
